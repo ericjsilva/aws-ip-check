@@ -37,9 +37,9 @@ usage: aws-ip-check [flags]
 
 ```shell
 $ aws-ip-check -ip 192.168.1.1
-IP 192.168.1.1 not found in AWS ip range
+IP 192.168.1.1 not found in AWS IP range
 
 
 $ aws-ip-check -ip $(nslookup www.amazon.com  | grep "Address" | tail -1 | awk '{print $NF}')
-IP X.X.X.X found in AWS ip range
+IP X.X.X.X found in AWS IP range for region {region}.
 ```
