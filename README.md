@@ -1,4 +1,4 @@
-# AWS IP Checker
+# AWS IP Checker [![Build Status](https://travis-ci.org/ericjsilva/aws-ip-check.svg?branch=master)](https://travis-ci.org/ericjsilva/aws-ip-check)
 
 `aws-ip-check` is a command line tool to check if an IP address belongs to Amazon Web Service (AWS) infrastructure or not.
 
