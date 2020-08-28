@@ -89,7 +89,7 @@ func realMain() int {
 	}
 
 	if valid := validIP(*ipAddress); valid == false {
-		fmt.Printf("invalid IP address provided: %s\n", *ipAddress)
+		fmt.Printf("Invalid IP address provided: %s\n", *ipAddress)
 		return 2
 	}
 
@@ -99,7 +99,7 @@ func realMain() int {
 
 	file, err := ioutil.ReadFile(*awsIPRangeFilePath)
 	if err != nil {
-		fmt.Printf("file error: %v\n", err)
+		fmt.Printf("File error: %v\n", err)
 		return 2
 	}
 
@@ -108,21 +108,23 @@ func realMain() int {
 
 	contains := false
 	var extra string
+	var region string
 
 	for _, r := range ipRange.Prefixes {
 		_, cidrnet, err := net.ParseCIDR(r.IPPrefix)
 		if err != nil {
-			fmt.Printf("error parsing CIDR %s: %v\n", r.IPPrefix, err)
+			fmt.Printf("Error parsing CIDR %s: %v\n", r.IPPrefix, err)
 			return 2
 		}
 		ip := net.ParseIP(*ipAddress)
 		if cidrnet.Contains(ip) {
 			contains = true
+			region = r.Region
 
 			if *extraInfo {
 				e, err := json.Marshal(r)
 				if err != nil {
-					fmt.Printf("error encoding range %+v: %v\n", r, err)
+					fmt.Printf("Error encoding range %+v: %v\n", r, err)
 					return 2
 				}
 				extra += fmt.Sprintf(",%s", e)
@@ -133,10 +135,10 @@ func realMain() int {
 	}
 
 	if contains {
-		fmt.Printf("IP %s found in AWS ip range%s\n", *ipAddress, extra)
+		fmt.Printf("IP %s found in AWS IP range for region %s. %s\n", *ipAddress, region, extra)
 		return 0
 	}
 
-	fmt.Printf("IP %s not found in AWS ip ranges\n", *ipAddress)
+	fmt.Printf("IP %s not found in AWS IP ranges\n", *ipAddress)
 	return 1
 }
