@@ -68,7 +68,7 @@ func TestValidIPWrongIPv4(t *testing.T) {
 	var b bool
 	b = validIP(wrongIPv4)
 	if b {
-		t.Errorf("Test failed, expecting FALSE ip: '%s'", wrongIPv4)
+		t.Errorf("Test failed, expecting FALSE IP: '%s'", wrongIPv4)
 	}
 }
 
@@ -76,7 +76,7 @@ func TestValidIPCorrectIPv4(t *testing.T) {
 	var b bool
 	b = validIP(correctIPv4)
 	if !b {
-		t.Errorf("Test failed, expecting TRUE ip: '%s'", correctIPv4)
+		t.Errorf("Test failed, expecting TRUE IP: '%s'", correctIPv4)
 	}
 }
 
@@ -84,7 +84,7 @@ func TestValidIPWrongIPv6(t *testing.T) {
 	var b bool
 	b = validIP(wrongIPv6)
 	if b {
-		t.Errorf("Test failed, expecting FALSE ip: '%s'", wrongIPv6)
+		t.Errorf("Test failed, expecting FALSE IP: '%s'", wrongIPv6)
 	}
 }
 
@@ -118,7 +118,7 @@ func TestRealMain(t *testing.T) {
 		if res.String() != "exit status 1" {
 			t.Errorf("Test failed, unexpected exist status 1 for non AWS range IP address")
 		}
-		if outbuf.String() != "IP 192.168.1.1 not found in AWS ip ranges\n" {
+		if outbuf.String() != "IP 192.168.1.1 not found in AWS IP ranges\n" {
 			t.Errorf("Test failed, unexpected output message: %s", outbuf.String())
 		}
 	})
@@ -141,7 +141,7 @@ func TestRealMain(t *testing.T) {
 		if res.String() != "exit status 0" {
 			t.Errorf("Test failed, unexpected exist status 0 for AWS range IP address")
 		}
-		awsIPoutput := fmt.Sprintf("IP %s found in AWS ip range\n", awsIP)
+		awsIPoutput := fmt.Sprintf("IP %s found in AWS IP range for region %s. \n", awsIP, "us-east-1")
 		if outbuf.String() != awsIPoutput {
 			t.Errorf("Test failed, unexpected output message: %s", outbuf.String())
 		}
